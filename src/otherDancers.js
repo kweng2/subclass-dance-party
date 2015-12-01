@@ -43,21 +43,30 @@ makeColorDancer.prototype.step = function() {
 
 var makeFollowDancer = function(top, left, timeBetweenSteps) {
   makeDancer.call(this, top, left, timeBetweenSteps);
+  var that = this;
+  // var mouseX = 0, mouseY = 0;
+  $(document).mousemove(function(e){
+   mouseX = e.pageX;
+   mouseY = e.pageY; 
+  });
+
+  // cache the selector
+  var follower = this.$node;
+  var xp = Math.floor(Number(this.$node.css('left').slice(0, -2)));
+  var yp = Math.floor(Number(this.$node.css('top').slice(0, -2)));
+  var loop = setInterval(function(){
+    // change 12 to alter damping higher is slower
+    xp += Math.floor((mouseX - xp) / 12);
+    yp += Math.floor((mouseY - yp) / 12);
+    follower.css({left:xp, top:yp});
+    
+  }, 20);
 };
 
 makeFollowDancer.prototype = Object.create(makeDancer.prototype);
 makeFollowDancer.prototype.constructor = makeFollowDancer;
 makeFollowDancer.prototype.step = function() {
-  var mousePos;
-  $('window').mousemove(function(){
-    mousePos[0] = event.pageX;
-    mousePos[1] = event.pageY;
-  });
-  this.$node.css('border-width','50px');
-  this.$node.css('border-color', 'teal');
-  this.$node.animate({
-    $("#logPos").html( "pageX: " + event.pageX + ", pageY: " + event.pageY);
-    // left: mousePos[0],
-    // top: mousePos[0]
-  },(this.timeBetweenSteps)/3);
+
+  // this.$node.css('border-width','50px');
+  // this.$node.css('border-color', 'teal');
 };

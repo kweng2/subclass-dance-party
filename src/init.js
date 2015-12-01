@@ -58,7 +58,7 @@ observer.observe(document, {
   //...
 });
 
-
+/*
 //Mouse tracking
 (function() {
     document.onmousemove = handleMouseMove;
@@ -88,3 +88,4 @@ observer.observe(document, {
         console.log(event.pageY);
     }
 })();
+*/
