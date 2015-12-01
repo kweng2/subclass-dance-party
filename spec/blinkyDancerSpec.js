@@ -21,23 +21,21 @@ describe("blinkyDancer", function() {
 
   describe("dance", function() {
     it("should call step at least once per second", function() {
-      // var spy1 = sinon.spy(blinkyDancer, "step");
-      // debugger;
-      expect(blinkyDancer.blinkCount).to.be.equal(0);
-      // expect(spy1.callCount).to.be.equal(0);
-      //blinkyDancer = new makeBlinkyDancer(10, 20, timeBetweenSteps);
-      clock.tick(timeBetweenSteps);
-      // debugger;
-      expect(blinkyDancer.blinkCount).to.be.equal(1);
-      // expect(spy1.callCount).to.be.equal(1);
+      sinon.spy(blinkyDancer, "step");
+      expect(blinkyDancer.step.callCount).to.be.equal(0);
+    // blinkyDancer = makeBlinkyDancer(10, 20, timeBetweenSteps);
+      // clock.tick(timeBetweenSteps);
+
+      // expect(blinkyDancer.step.callCount).to.be.equal(0);
 
       clock.tick(timeBetweenSteps);
-      expect(blinkyDancer.blinkCount).to.be.equal(2);
+      expect(blinkyDancer.step.callCount).to.be.equal(1);
 
-      // expect(blinkyDancer.blinkCount).to.be.equal(0);
+      clock.tick(timeBetweenSteps);
+      expect(blinkyDancer.step.callCount).to.be.equal(2);
 
-
-
+      clock.tick(timeBetweenSteps);
+      expect(blinkyDancer.step.callCount).to.be.equal(3);
     });
   });
 });

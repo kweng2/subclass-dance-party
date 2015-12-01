@@ -1,6 +1,5 @@
 $(document).ready(function() {
   window.dancers = [];
-
   $(".addDancerButton").on("click", function(event) {
     /* This function sets up the click handlers for the create-dancer
      * buttons on dancefloor.html. You should only need to make one small change to it.
@@ -25,9 +24,36 @@ $(document).ready(function() {
     var dancer = new dancerMakerFunction(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
-      Math.random() * 1000
+      (Math.random() * 2000)+500
     );
     $('body').append(dancer.$node);
   });
 });
 
+
+MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+
+var observer = new MutationObserver(function(mutations, observer) {
+    // fired when a mutation occurs
+  $('.dancer').on("mouseover", function(){
+    $(this).css('border', '20px dashed purple');
+    $(this).css('border-radius', '20px');
+  });
+  var dots = $('.dancer');
+  var counter = 0;
+  for(var i=0; i<dots.length; i++) {
+    if($(dots[i]).css('border-color')==='rgb(255, 0, 0)') counter++;
+  }
+  if(counter>5) {
+    console.log('Too many red dots');
+    $(dots).css('border-color', 'yellow');
+  }
+});
+
+// define what element should be observed by the observer
+// and what types of mutations trigger the callback
+observer.observe(document, {
+  subtree: true,
+  childList: true
+  //...
+});

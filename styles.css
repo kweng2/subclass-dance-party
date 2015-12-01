@@ -3,8 +3,10 @@ body, html{
 }
 body{
   margin: 0px;
-  background-color:#444;
   font-size: 18px;
+  background-image: url("http://intrawallpaper.com/wp-content/uploads/cat-wallpaper-animals.jpg");
+  background-size: auto 100%;
+  background-repeat: no-repeat;
 }
 body, a:link, a:visited, a:active{
   color: lightblue;
