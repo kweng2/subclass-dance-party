@@ -40,3 +40,24 @@ makeColorDancer.prototype.step = function() {
   // this.$node.css('border-radius', randBorder);
   this.$node.css('border-color',randColor);
 };
+
+var makeFollowDancer = function(top, left, timeBetweenSteps) {
+  makeDancer.call(this, top, left, timeBetweenSteps);
+};
+
+makeFollowDancer.prototype = Object.create(makeDancer.prototype);
+makeFollowDancer.prototype.constructor = makeFollowDancer;
+makeFollowDancer.prototype.step = function() {
+  var mousePos;
+  $('window').mousemove(function(){
+    mousePos[0] = event.pageX;
+    mousePos[1] = event.pageY;
+  });
+  this.$node.css('border-width','50px');
+  this.$node.css('border-color', 'teal');
+  this.$node.animate({
+    $("#logPos").html( "pageX: " + event.pageX + ", pageY: " + event.pageY);
+    // left: mousePos[0],
+    // top: mousePos[0]
+  },(this.timeBetweenSteps)/3);
+};
