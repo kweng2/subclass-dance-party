@@ -31,32 +31,32 @@ $(document).ready(function() {
 });
 
 
-MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+// MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
-var observer = new MutationObserver(function(mutations, observer) {
-    // fired when a mutation occurs
-  $('.dancer').on("mouseover", function(){
-    $(this).css('border', '20px dashed purple');
-    $(this).css('border-radius', '20px');
-  });
-  var dots = $('.dancer');
-  var counter = 0;
-  for(var i=0; i<dots.length; i++) {
-    if($(dots[i]).css('border-color')==='rgb(255, 0, 0)') counter++;
-  }
-  if(counter>5) {
-    console.log('Too many red dots');
-    $(dots).css('border-color', 'yellow');
-  }
-});
+// var observer = new MutationObserver(function(mutations, observer) {
+//     // fired when a mutation occurs
+//   $('.dancer').on("mouseover", function(){
+//     $(this).css('border', '20px dashed purple');
+//     $(this).css('border-radius', '20px');
+//   });
+//   var dots = $('.dancer');
+//   var counter = 0;
+//   for(var i=0; i<dots.length; i++) {
+//     if($(dots[i]).css('border-color')==='rgb(255, 0, 0)') counter++;
+//   }
+//   if(counter>5) {
+//     console.log('Too many red dots');
+//     $(dots).css('border-color', 'yellow');
+//   }
+// });
 
-// define what element should be observed by the observer
-// and what types of mutations trigger the callback
-observer.observe(document, {
-  subtree: true,
-  childList: true
-  //...
-});
+// // define what element should be observed by the observer
+// // and what types of mutations trigger the callback
+// observer.observe(document, {
+//   subtree: true,
+//   childList: true
+//   //...
+// });
 
 /*
 //Mouse tracking

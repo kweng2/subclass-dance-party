@@ -12,14 +12,20 @@ makeMovingDancer.prototype.step = function() {
   var randY = (Math.floor(Math.random()*100)) - 50;
   var stX = '+=' + randX;
   var stY = '+=' + randY;
-
+  var flip = randX > 0 ? 'scaleX(-1)' : 'scaleX(1)';
+  this.$node.css('transform', flip);
   var back = ["#ff0000","blue","gray", 'yellow', 'green'];
   var randColor = back[Math.floor(Math.random() * back.length)];
-  this.$node.css('border-color', 'white');
+  this.$node.css('background-image', 'url("https://lh5.ggpht.com/Fgo0qJlWs_kKUYldkRf-4Cp1gz4AXuJF9lsDsKvyNmLQYgqYkGcTLxUrhl1Hq_P_37g=w300")');
+  this.$node.css('border', '0px solid red');
+  this.$node.css('border-radius', '0px');
+  this.$node.css('background-size', '100%');
+  this.$node.css('height', '50px');
+  this.$node.css('width', '50px');
   this.$node.animate({
     left: stX,
     top: stY,
-  }, 50);
+  }, 150);
 };
 
 var makeColorDancer = function(top, left, timeBetweenSteps) {
@@ -49,6 +55,12 @@ var makeFollowDancer = function(top, left, timeBetweenSteps) {
    mouseX = e.pageX;
    mouseY = e.pageY; 
   });
+  this.$node.css('border', '0px solid red');
+  this.$node.css('border-radius', '0px');
+  this.$node.css('background-image', 'url("http://www.clipartbest.com/cliparts/xTg/o5e/xTgo5e9Lc.png")');
+  this.$node.css('background-size', '100%');
+  this.$node.css('height', '100px');
+  this.$node.css('width', '100px');
 
   // cache the selector
   var follower = this.$node;
@@ -56,17 +68,24 @@ var makeFollowDancer = function(top, left, timeBetweenSteps) {
   var yp = Math.floor(Number(this.$node.css('top').slice(0, -2)));
   var loop = setInterval(function(){
     // change 12 to alter damping higher is slower
-    xp += Math.floor((mouseX - xp) / 12);
-    yp += Math.floor((mouseY - yp) / 12);
-    follower.css({left:xp, top:yp});
+    xp += Math.floor((mouseX - xp) / 50);
+    yp += Math.floor((mouseY - yp) / 50);
+    if(mouseX - xp > 0) {
+      // make the image face right
+      that.$node.css('transform', 'scaleX(-1)');
+    }
+    else {
+      // make image face left
+      that.$node.css('transform', 'scaleX(1)');
+    }
+    follower.css({
+      left:xp,
+      top:yp,
+      // 'border-color':co
+    });
     
   }, 20);
 };
 
 makeFollowDancer.prototype = Object.create(makeDancer.prototype);
 makeFollowDancer.prototype.constructor = makeFollowDancer;
-makeFollowDancer.prototype.step = function() {
-
-  // this.$node.css('border-width','50px');
-  // this.$node.css('border-color', 'teal');
-};
