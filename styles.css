@@ -23,6 +23,8 @@ body, a:link, a:visited, a:active{
 .topbar{
   height:32px;
   background-color: #555;
+  position: relative;
+  z-index: 1;
 }
 .title{
   background-color: #777;
@@ -40,6 +42,7 @@ body, a:link, a:visited, a:active{
   height:100px;
   width:100px;
   border:1px solid black;
+  z-index:0;
 }
 .particle{
   border:5px solid red;

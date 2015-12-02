@@ -56,10 +56,15 @@ $(document).ready(function() {
 var collision = function() {
   // find the pos of player
   var player = $('.player');
-  var playerH = Number($(player[0]).css('height').slice(0,-2))*0.6;
-  var playerW = Number($(player[0]).css('width').slice(0,-2))*0.6;
-  var playerX = Number($(player[0]).css('left').slice(0,-2)) + 0.2 * playerW/0.6;
-  var playerY = Number($(player[0]).css('top').slice(0,-2)) + 0.2 * playerH/0.6;
+  // var playerH = Number($(player[0]).css('height').slice(0,-2))*0.6;
+  // var playerW = Number($(player[0]).css('width').slice(0,-2))*0.6;
+  // var playerX = Number($(player[0]).css('left').slice(0,-2)) + 0.2 * playerW/0.6;
+  // var playerY = Number($(player[0]).css('top').slice(0,-2)) + 0.2 * playerH/0.6;
+  var playerH = Number($(player[0]).css('height').slice(0,-2));
+  var playerW = Number($(player[0]).css('width').slice(0,-2));
+  var playerX = Number($(player[0]).css('left').slice(0,-2));
+  var playerY = Number($(player[0]).css('top').slice(0,-2));
+
 
   var fishes = $('.dancer');
 
@@ -69,8 +74,8 @@ var collision = function() {
     // find position of this fish 
     var fishX = Number($(fishes[i]).css('left').slice(0,-2));
     var fishY = Number($(fishes[i]).css('top').slice(0,-2));
-    var fishH = Number($(fishes[i]).css('height').slice(0,-2))*0.6;
-    var fishW = Number($(fishes[i]).css('width').slice(0,-2))*0.6;
+    var fishH = Number($(fishes[i]).css('height').slice(0,-2));
+    var fishW = Number($(fishes[i]).css('width').slice(0,-2));
 
     // if player is sufficiently close to this fish position, remove this fish  
     // Collision detection logic:
@@ -108,8 +113,8 @@ var collision = function() {
 };
 
 var eat = function(player, fish, playerW, playerH) { 
-  var newW = ''+(playerW/0.6 +(150/playerW))+'px';
-  var newH = ''+(playerH/0.6 +(150/playerH))+'px';
+  var newW = ''+(playerW +(150/playerW))+'px';
+  var newH = ''+(playerH +(150/playerH))+'px';
   // var newW = ''+(playerW/0.6 *1.1)+'px';
   // var newH = ''+(playerH/0.6 *1.1)+'px';
   $(player[0]).css('width',newW);

@@ -17,7 +17,7 @@ makeMovingDancer.prototype.step = function() {
   var back = ["#ff0000","blue","gray", 'yellow', 'green'];
   var randColor = back[Math.floor(Math.random() * back.length)];
   this.$node.css('background-image', 'url("https://lh5.ggpht.com/Fgo0qJlWs_kKUYldkRf-4Cp1gz4AXuJF9lsDsKvyNmLQYgqYkGcTLxUrhl1Hq_P_37g=w300")');
-  this.$node.css('border', '0px solid red');
+  this.$node.css('border', '1px solid red');
   this.$node.css('border-radius', '0px');
   this.$node.css('background-size', '100%');
   this.$node.css('height', '50px');
