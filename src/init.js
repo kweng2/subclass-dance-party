@@ -41,6 +41,14 @@ $(document).ready(function() {
     );
     $('body').append(dancer.$node);
     $('.addPlayerButton').toggle();
+    $('.stopButton').toggle();
+  });
+  $(".stopButton").on("click", function(event) {
+    // $('body').append(dancer.$node);
+    // debugger;
+    $('.player').remove();
+    $('.addPlayerButton').toggle();
+    $('.stopButton').toggle();
   });
 });
 

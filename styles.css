@@ -15,6 +15,11 @@ body, a:link, a:visited, a:active{
   padding:5px 12px;
   float:right;
 }
+.stopButton {
+  padding:5px 12px;
+  float:right;
+  display: none;
+}
 .topbar{
   height:32px;
   background-color: #555;
