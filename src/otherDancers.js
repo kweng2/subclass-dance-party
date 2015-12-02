@@ -55,18 +55,18 @@ var makeFollowDancer = function(top, left, timeBetweenSteps) {
 
   var mouseX = 200, mouseY = 200;
   $(document).mousemove(function(e){
-   mouseX = e.pageX;
-   mouseY = e.pageY;
+   mouseX = e.pageX - Number(that.$node.css('width').slice(0, -2))/2;
+   mouseY = e.pageY - Number(that.$node.css('height').slice(0, -2))/2;
   });
 
   // cache the selector
   var follower = this.$node;
-  var xp = Math.floor(Number(this.$node.css('left').slice(0, -2))) - Number(that.$node.css('width').slice(0, -2))/2;
-  var yp = Math.floor(Number(this.$node.css('top').slice(0, -2))) - Number(that.$node.css('height').slice(0, -2))/2;
+  var xp = Number(this.$node.css('left').slice(0, -2));
+  var yp = Number(this.$node.css('top').slice(0, -2));
   var loop = setInterval(function(){
     // change 12 to alter damping higher is slower
-    xp += Math.floor((mouseX - xp) / 50);
-    yp += Math.floor((mouseY - yp) / 50);
+    xp += ((mouseX - xp) / 20);
+    yp += ((mouseY - yp) / 20);
     // xp += Math.floor(((Math.random()*0.2 + 0.9)*mouseX - xp) / 50);
     // yp += Math.floor(((Math.random()*0.2 + 0.9)*mouseY - yp) / 50);
     if(mouseX - xp > 0) {
@@ -78,8 +78,8 @@ var makeFollowDancer = function(top, left, timeBetweenSteps) {
       that.$node.css('transform', 'scaleX(1)');
     }
     follower.css({
-      left:xp,
-      top:yp,
+      left:Math.floor(xp),
+      top:Math.floor(yp),
       // 'border-color':co
     });
     

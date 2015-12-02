@@ -39,6 +39,7 @@ body, a:link, a:visited, a:active{
   background-size: 100%;
   height:100px;
   width:100px;
+  border:1px solid black;
 }
 .particle{
   border:5px solid red;
