@@ -101,16 +101,73 @@ var collision = function() {
 var eat = function(player, fish, playerW, playerH) { 
   var newW = ''+(playerW/0.6 +(150/playerW))+'px';
   var newH = ''+(playerH/0.6 +(150/playerH))+'px';
+  // var newW = ''+(playerW/0.6 *1.1)+'px';
+  // var newH = ''+(playerH/0.6 *1.1)+'px';
   $(player[0]).css('width',newW);
   $(player[0]).css('height',newH);
   fish.remove();
-  console.log('collided'); 
+  // console.log('collided'); 
+
+  // explode!
+  explode(player, fish);
 };
 
 // Wrap the above function in setInterval to check every few milliseconds
 setInterval(collision, 50);
 
+// explosion function that creates a bunch of sprites that will shoot outward in a random direction
+var explode = function(player, fish) {
+  // define particle class
+  var Particle = function(){
+    // var destX = Math.floor(Math.random()*$(window).width());
+    // var destY = Math.floor(Math.random()*$(window).height());
+    var fishX = Number($(fish).css('left').slice(0,-2));
+    var fishY = Number($(fish).css('top').slice(0,-2));
 
+    var playerH = Number($(player[0]).css('height').slice(0,-2));
+    var playerW = Number($(player[0]).css('width').slice(0,-2));
+    var playerX = Number($(player[0]).css('left').slice(0,-2))+playerW/2;
+    var playerY = Number($(player[0]).css('top').slice(0,-2))+playerH/2;
+
+    this.$node = $('<div class="particle"></div>');
+    // this.$node.css('left', $(player[0]).css('left'));
+    this.$node.css('left', fishX);
+    // this.$node.css('top', $(player[0]).css('top'));
+    this.$node.css('top', fishY);
+    var randX = (Math.floor(Math.random()*300)) - 150;
+    var randY = (Math.floor(Math.random()*300)) - 150;
+    this.$node.animate({
+      left: (playerX+randX)+'px',
+      top: (playerY+randY)+'px',
+      opacity: 0
+    },500);
+    var that = this;
+    setTimeout(function(){that.$node.remove();},1010);
+    // figure out where to go
+  };
+
+  for(var i=0; i<20; i++) {
+    var newParticle = new Particle();
+    $('body').append(newParticle.$node);
+    // debugger;
+    // setTimeout(function(){newParticle.$node.remove();},1010);
+  }
+
+//   .dancer{
+//   border:10px solid red;
+//   border-radius:10px;
+//   position:absolute;
+//   background-size:200px;
+// } 
+
+  // sprites will have these properties:
+    // direction (randomly set)
+    // color: gray
+    // opacity (random)
+    // speed (random between minSpeed and maxSpeed)
+  // sprite upon creation will also start moving via transition / transform
+  // sprite will delete itself after a timed delay
+}
 
 
 
