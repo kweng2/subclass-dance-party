@@ -50,26 +50,25 @@ makeColorDancer.prototype.step = function() {
 var makeFollowDancer = function(top, left, timeBetweenSteps) {
   makeDancer.call(this, top, left, timeBetweenSteps);
   var that = this;
-  // var mouseX = 0, mouseY = 0;
+  // set this node's class to be something unique
+  this.$node[0].className = 'player';
+
+  var mouseX = 200, mouseY = 200;
   $(document).mousemove(function(e){
    mouseX = e.pageX;
-   mouseY = e.pageY; 
+   mouseY = e.pageY;
   });
-  this.$node.css('border', '0px solid red');
-  this.$node.css('border-radius', '0px');
-  this.$node.css('background-image', 'url("http://www.clipartbest.com/cliparts/xTg/o5e/xTgo5e9Lc.png")');
-  this.$node.css('background-size', '100%');
-  this.$node.css('height', '100px');
-  this.$node.css('width', '100px');
 
   // cache the selector
   var follower = this.$node;
-  var xp = Math.floor(Number(this.$node.css('left').slice(0, -2)));
-  var yp = Math.floor(Number(this.$node.css('top').slice(0, -2)));
+  var xp = Math.floor(Number(this.$node.css('left').slice(0, -2))) - Number(that.$node.css('width').slice(0, -2))/2;
+  var yp = Math.floor(Number(this.$node.css('top').slice(0, -2))) - Number(that.$node.css('height').slice(0, -2))/2;
   var loop = setInterval(function(){
     // change 12 to alter damping higher is slower
     xp += Math.floor((mouseX - xp) / 50);
     yp += Math.floor((mouseY - yp) / 50);
+    // xp += Math.floor(((Math.random()*0.2 + 0.9)*mouseX - xp) / 50);
+    // yp += Math.floor(((Math.random()*0.2 + 0.9)*mouseY - yp) / 50);
     if(mouseX - xp > 0) {
       // make the image face right
       that.$node.css('transform', 'scaleX(-1)');

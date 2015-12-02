@@ -19,8 +19,21 @@ $(document).ready(function() {
     // get the maker function for the kind of dancer we're supposed to make
     var dancerMakerFunction = window[dancerMakerFunctionName];
 
-    // make a dancer with a random position
+    // make 10 dancer with a random position
+    for(var i=0; i<10; i++){
+      var dancer = new dancerMakerFunction(
+        $("body").height() * Math.random(),
+        $("body").width() * Math.random(),
+        (Math.random() * 2000)+500
+      );
+      $('body').append(dancer.$node);
+    }
+  });
+  $(".addPlayerButton").on("click", function(event) {
+    var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
+    var dancerMakerFunction = window[dancerMakerFunctionName];
 
+    // make a fish player
     var dancer = new dancerMakerFunction(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
@@ -29,6 +42,76 @@ $(document).ready(function() {
     $('body').append(dancer.$node);
   });
 });
+
+// Check for object collision
+var collision = function() {
+  // find the pos of player
+  var player = $('.player');
+  var playerH = Number($(player[0]).css('height').slice(0,-2))*0.6;
+  var playerW = Number($(player[0]).css('width').slice(0,-2))*0.6;
+  var playerX = Number($(player[0]).css('left').slice(0,-2)) + 0.2 * playerW/0.6;
+  var playerY = Number($(player[0]).css('top').slice(0,-2)) + 0.2 * playerH/0.6;
+
+  var fishes = $('.dancer');
+
+
+  // look at all the pos of the other fish
+  for (var i = 0; i < fishes.length; i++) {
+    // find position of this fish 
+    var fishX = Number($(fishes[i]).css('left').slice(0,-2));
+    var fishY = Number($(fishes[i]).css('top').slice(0,-2));
+    var fishH = Number($(fishes[i]).css('height').slice(0,-2))*0.6;
+    var fishW = Number($(fishes[i]).css('width').slice(0,-2))*0.6;
+
+    // if player is sufficiently close to this fish position, remove this fish  
+    // Collision detection logic:
+    // if P is above f
+    if (fishY - playerY > 0) {
+      // P is left of f
+      if (playerX - fishX < 0) {
+        if (fishX - playerX < playerW && fishY - playerY < playerH) {
+          eat(player, fishes[i], playerW, playerH);
+        }
+      } 
+      // P is right of f
+      else {
+        if (playerX - fishX < fishW && fishY - playerY < playerH) {
+          eat(player, fishes[i], playerW, playerH);
+        }
+      }
+    }
+    // P is below f
+    else {
+      // P is left of f
+      if (playerX - fishX < 0) {
+        if (fishX - playerX < playerW && playerY - fishY < fishH) {
+          eat(player, fishes[i], playerW, playerH);
+        }
+      }
+      // P is right of f
+      else {
+        if (playerX - fishX < fishW && playerY - fishY < fishH) {
+          eat(player, fishes[i], playerW, playerH);
+        }
+      } 
+    }
+  }
+};
+
+var eat = function(player, fish, playerW, playerH) { 
+  var newW = ''+(playerW/0.6 +(150/playerW))+'px';
+  var newH = ''+(playerH/0.6 +(150/playerH))+'px';
+  $(player[0]).css('width',newW);
+  $(player[0]).css('height',newH);
+  fish.remove();
+  console.log('collided'); 
+};
+
+// Wrap the above function in setInterval to check every few milliseconds
+setInterval(collision, 50);
+
+
+
 
 
 // MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
