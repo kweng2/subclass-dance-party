@@ -40,6 +40,7 @@ $(document).ready(function() {
       (Math.random() * 2000)+500
     );
     $('body').append(dancer.$node);
+    $('.addPlayerButton').toggle();
   });
 });
 
@@ -105,6 +106,8 @@ var eat = function(player, fish, playerW, playerH) {
   // var newH = ''+(playerH/0.6 *1.1)+'px';
   $(player[0]).css('width',newW);
   $(player[0]).css('height',newH);
+  // $(player[0]).moveTo(10,10);
+  // debugger;
   fish.remove();
   // console.log('collided'); 
 
