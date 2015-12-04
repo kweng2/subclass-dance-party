@@ -131,6 +131,7 @@ var eat = function(player, fish, playerW, playerH) {
   // debugger;
   fish.remove();
   // console.log('collided'); 
+  debugger;
 
   // explode!
   explode(player, fish);
